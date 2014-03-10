@@ -22,11 +22,22 @@ if ( !window.requestAnimationFrame ) {
 }
 
 /**
- * Template Component
+ * Knob Component
+ *
+ * Markup example:
+ *
+ * <canvas class="js-component-knob" width="180" height="180"
+ *   data-delay-ms="100"
+ *   data-value="0.65"
+ *   data-easing="easeOutSine"
+ *   data-canvas-settings='{ "radius": "75", "lineWidth": "10", "strokeStyle": "#01A4A4", "fillStyle": "#01A4A4" }'>
+ * </canvas>
+ *
+ * Note that the canvas-settings must be a valid JSON object.
  *
  * @method
  * init()
- * - Initializes the header component
+ * - Initializes the knob component
  *
  * @method
  * render()
@@ -44,15 +55,19 @@ if ( !window.requestAnimationFrame ) {
    */
   components.Knob = function (context) {
 
-    // public api object
+    // Public api object
     var api = {};
+
+    // Canvas context
     var ctx = null;
 
+    // Angle radians with start and end of an arc
     var angleRadians = {
       start: 1.5 * Math.PI,
       end: (2 * Math.PI) / 100
     }
 
+    // Defaults that will be set in the canvas context
     var defaults = {
       "radius": "75",
       "lineWidth": "10",
@@ -63,18 +78,24 @@ if ( !window.requestAnimationFrame ) {
       "textAlign": "center"
     };
 
+    // Settings that will be merged with defaults
     var settings = {};
 
+    // Some values for the arc
     var x = context.width / 2;
     var y = context.height / 2;
-    var easing = null;
 
+    // The desired value we want
     var finalValue = context.getAttribute('data-value') || 100;
 
+    // Variables to help keeping track of the loop
     var startedTime = null;
     var isStarted = false;
 
+    // Duration of the tweening
     var ANIMATION_DURATION = 600;
+
+    // Change this if updating the markup
     var DATA_DELAY_MS = "data-delay-ms";
     var DATA_SETTINGS = "data-canvas-settings";
 
