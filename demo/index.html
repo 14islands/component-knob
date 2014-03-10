@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Component Loader Demo</title>
+  <style>
+
+    html, body {
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    body {
+      background-color: #f4f4f4;
+    }
+
+    .js-component-knob {
+      margin: 10%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <canvas class="js-component-knob" width="180" height="180" data-delay-ms="100" data-value="0.65" data-easing="easeOutSine" data-canvas-settings='{ "radius": "75", "lineWidth": "10", "strokeStyle": "#01A4A4", "fillStyle": "#01A4A4" }'></canvas>
+
+  <canvas class="js-component-knob" width="180" height="180" data-delay-ms="300" data-value="0.55" data-easing="easeInOutQuart" data-canvas-settings='{ "radius": "75", "lineWidth": "5", "strokeStyle": "#E54028", "fillStyle": "#E54028" }'></canvas>
+
+  <canvas class="js-component-knob" width="180" height="180" data-delay-ms="500" data-value="0.95" data-easing="easeOutQuad" data-canvas-settings='{ "radius": "75", "lineWidth": "12", "strokeStyle": "#616161", "fillStyle": "#616161" }'></canvas>
+
+  <script src="js/easing.js"></script>
+  <script src="js/component-loader.js"></script>
+  <script src="../component-knob.js"></script>
+
+  <script>
+    componentLoader.initializeComponents();
+  </script>
+</body>
+</html>
